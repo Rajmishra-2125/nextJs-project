@@ -1,6 +1,6 @@
 import { connect } from "@/dbconfig/dbConfig";
 import User from "@/models/userModels";
-import bcrypt from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -17,7 +17,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    // hash password
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
 
     const newUser = new User({
       username,
@@ -28,8 +30,10 @@ export async function POST(request: NextRequest) {
     await newUser.save();
 
     return NextResponse.json(
-      { message: "User registered successfully" },
-      { status: 201 }
+      { 
+        message: "User registered successfully",
+        success: true,
+       },
     );
   } catch (error) {
     console.error("Error during user signup:", error);
