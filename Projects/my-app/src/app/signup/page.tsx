@@ -14,6 +14,7 @@ function SignupPage() {
     password: "",
   });
 
+
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
@@ -23,11 +24,11 @@ function SignupPage() {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
       console.log("Signup success", response.data);
-      toast.success("Signup successful");
+      toast.success(response.data.message);
       router.push("/login");
       
     } catch (error: any) {
-      toast.error("Signup failed. Please try again.");
+      toast.error(error.message);
       console.log("Signup failed", error.message);
     } finally {
       setLoading(false);
