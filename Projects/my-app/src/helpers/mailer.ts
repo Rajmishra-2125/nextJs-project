@@ -1,11 +1,18 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import User from '@/models/userModels';
 import bcryptjs from 'bcryptjs';
+import crypto from 'crypto'
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
-    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
+    const hashedToken = crypto.randomBytes(32).toString('hex');
+
+    console.log(hashedToken);
+    
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(
         userId,
@@ -23,29 +30,29 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     }
 
     // Looking to send emails in production? Check out our Email API/SMTP product!
-    var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "fc1ffef59df4dd",
-        pass: "d7d50fa5096fd0",
-      },
-    });
+    // var transport = nodemailer.createTransport({
+    //   host: "sandbox.smtp.mailtrap.io",
+    //   port: 2525,
+    //   auth: {
+    //     user: "fc1ffef59df4dd",
+    //     pass: "d7d50fa5096fd0",
+    //   },
+    // });
 
     const link =
       emailType === "VERIFY"
         ? `${process.env.DOMAIN}/verifyemail?token=${hashedToken}`
         : `${process.env.DOMAIN}/resetpassword?token=${hashedToken}`;
 
-    const mailOptions = {
-      from: "rajmishra@gmail.com",
+    const mailresponse = await resend.emails.send({
+      from: process.env.EMAIL_FROM!,
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: `<p>Click <a href="${link}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "Reset your password"}</p>`,
-    };
+    });    
 
-    const mailresponse = await transport.sendMail(mailOptions);
+  
     return mailresponse;
   } catch (error: any) {
     throw new Error(error.message);
