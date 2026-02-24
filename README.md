@@ -1,6 +1,6 @@
 # Next.js Project
 
-This project is a Next.js application that is currently live at [https://next-js-project-rno4.vercel.app/profile](https://next-js-project-rno4.vercel.app/profile).
+This project is a Next.js application that is currently live at [https://next-js-project-rno4.vercel.app](https://next-js-project-rno4.vercel.app).
 
 ## Technologies Used
 - **TypeScript**: 94.6% of the codebase is written in TypeScript, providing static typing for improved development and maintenance.
