@@ -76,10 +76,12 @@ function ProfilePage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+    <div className="flex items-center justify-center min-h-screen bg-linear-to-l from-blue-600 to-indigo-700 px-4">
       <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
         {/* Title */}
-        <h1 className="text-3xl text-gray-900 font-bold text-center mb-2">Profile</h1>
+        <h1 className="text-3xl text-gray-900 font-bold text-center mb-2">
+          Profile
+        </h1>
 
         <p className="text-gray-500 text-center mb-6">Manage your account</p>
 
