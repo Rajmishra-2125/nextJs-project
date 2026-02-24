@@ -8,7 +8,7 @@ export default async function UserProfile({ params }: PageProps) {
   const { id } = await params;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-50 via-white to-blue-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-l from-blue-600 to-indigo-700 px-4">
       {/* Card */}
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
         {/* Avatar */}
