@@ -48,10 +48,12 @@ function Page() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
+    <div className="flex items-center text-gray-800 justify-center min-h-screen bg-linear-to-l from-blue-600 to-indigo-700 px-4">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Title */}
-        <h1 className="text-3xl font-bold text-center mb-2">Reset Password</h1>
+        <h1 className="text-3xl font-bold text-gray-900 text-center mb-2">
+          Reset Password
+        </h1>
 
         <p className="text-gray-500 text-center mb-6">
           Enter your new password below
@@ -110,7 +112,7 @@ function Page() {
             {/* Back link */}
             <div className="text-center mt-4">
               <Link
-                href="/Profile"
+                href="/profile"
                 className="text-blue-500 hover:underline text-sm"
               >
                 Back to Profile
